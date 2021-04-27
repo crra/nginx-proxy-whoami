@@ -1,0 +1,18 @@
+# based on: https://github.com/nginx-proxy/nginx-proxy
+version: "3"
+services:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  whoami:
+    build: ./
+    expose:
+      - 8080
+    environment:
+      - PORT=8080
+      - VIRTUAL_HOST=whoami.local
